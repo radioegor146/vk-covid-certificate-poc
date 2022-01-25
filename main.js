@@ -5,7 +5,7 @@ const PdfParse = require("pdf-parse");
 const stringify = require("csv-stringify/lib/sync")
 
 const vk = new VK({
-    token: process.env.TOKEN || ""
+    token: process.env.TOKEN || "e4cb7a078da80b0e6f22365395412954b7d76ab23bbd7d248cf508eb4f10a6b4119bc0ed470c0f8ff215b"
 });
 
 async function parsePdf(pdfData) {
@@ -88,6 +88,24 @@ async function parsePdf(pdfData) {
         result.dateOfBirth = data[0][3];
         result.gender = data[0][4];
         result.passport = data[0][12];
+    } else if (data[0][0] === "Медицинский сертификат о профилактических прививках против новой коронавирусной") {
+        result = {};
+        result.dateOfBirth = data[0][3];
+        result.gender = data[0][4];
+        result.fullName = data[0][7];
+        result.passport = data[0][10];
+        result.snils = data[0][12];
+        result.otherPassport = data[0][13];
+        result.oms = data[0][16];
+    } else if (data[0][0] === "Medical certificate of immunization against the novel coronavirus infection COVID-19 or medical") {
+        result = {};
+        result.dateOfBirth = data[0][3];
+        result.gender = data[0][4];
+        result.fullName = data[0][7];
+        result.passport = data[0][10];
+        result.snils = data[0][12];
+        result.otherPassport = data[0][13];
+        result.oms = data[0][16];
     }
     if (!result) {
         console.info(data);
